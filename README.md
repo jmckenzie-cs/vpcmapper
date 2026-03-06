@@ -26,11 +26,17 @@ chmod +x vpc_resource_mapper.sh
 ## Usage
 
 ```bash
-# Basic usage (uses default region from AWS config)
+# Single VPC (uses default region from AWS config)
 ./vpc_resource_mapper.sh vpc-1234567890abcdef0
 
-# Specify region
+# Single VPC with specific region
 ./vpc_resource_mapper.sh vpc-1234567890abcdef0 us-east-1
+
+# Multiple VPCs in different regions
+./vpc_resource_mapper.sh vpc-1234567890abcdef0 us-east-1 vpc-0fedcba9876543210 us-west-2
+
+# Multiple VPCs, mix of specified and default regions
+./vpc_resource_mapper.sh vpc-1234567890abcdef0 vpc-0fedcba9876543210 us-west-2
 
 # Save output to file
 ./vpc_resource_mapper.sh vpc-1234567890abcdef0 us-east-1 > vpc-map.json
@@ -38,6 +44,7 @@ chmod +x vpc_resource_mapper.sh
 
 ## Output Format
 
+Single VPC:
 ```json
 {
   "us-east-1": {
@@ -47,6 +54,22 @@ chmod +x vpc_resource_mapper.sh
     "db_subnet_a": "subnet-11223344556677888",
     "db_subnet_b": "subnet-11223344556677889",
     "db_sg": "sg-11223344556677889"
+  }
+}
+```
+
+Multiple VPCs across regions:
+```json
+{
+  "us-east-1": {
+    "vpc": "vpc-11223344556677889",
+    "scanner_subnet": "subnet-11223344556677887",
+    "scanner_sg": "sg-11223344556677888"
+  },
+  "us-west-2": {
+    "vpc": "vpc-99887766554433221",
+    "web_subnet": "subnet-99887766554433220",
+    "app_sg": "sg-99887766554433221"
   }
 }
 ```
