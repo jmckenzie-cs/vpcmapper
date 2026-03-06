@@ -27,13 +27,13 @@ chmod +x vpc_resource_mapper.sh
 
 ```bash
 # Basic usage (uses default region from AWS config)
-./vpc_resource_mapper.sh vpc-042a62a2a92da726f
+./vpc_resource_mapper.sh vpc-1234567890abcdef0
 
 # Specify region
-./vpc_resource_mapper.sh vpc-042a62a2a92da726f us-east-1
+./vpc_resource_mapper.sh vpc-1234567890abcdef0 us-east-1
 
 # Save output to file
-./vpc_resource_mapper.sh vpc-042a62a2a92da726f us-east-1 > vpc-map.json
+./vpc_resource_mapper.sh vpc-1234567890abcdef0 us-east-1 > vpc-map.json
 ```
 
 ## Output Format
